@@ -20,7 +20,7 @@ public class DemoApplication {
 Hello World!
 </br>
 </br>
-I'm Azure.
+I'm Azure by Gradle.
 """;
 	}
 }
