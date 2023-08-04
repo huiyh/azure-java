@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>赶集FE测试</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Lato, sans-serif
+    }
+
+    div.tab {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .btn {
+      background-color: #eee;
+      border: none;
+      outline: 0;
+      cursor: pointer;
+      padding: 8px 14px;
+      transition: .3s;
+      font-size: 17px
+    }
+
+    .btn:hover {
+      background-color: #ddd
+    }
+
+    .btn.active {
+      background-color: #def
+    }
+
+    .tabcontent {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    input[type=text] {
+      padding: 10px;
+      border: 1px solid #dcdcdc;
+      transition: box-shadow .3s, border .3s
+    }
+
+    input[type=text].focus,
+    input[type=text]:focus {
+      border: 1px solid #707070;
+      box-shadow: 0 0 5px 1px #969696
+    }
+  </style>
+  <script type="text/javascript">
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function byClass(c) {
+      return document.getElementsByClassName(c);
+    }
+
+    function fullscreen(elm) {
+      (elm.requestFullscreen ? elm.requestFullscreen() : (elm.webkitRequestFullscreen ? elm.webkitRequestFullscreen() : (elm.mozRequestFullScreen ? elm.mozRequestFullScreen() : (elm.msRequestFullscreen ? elm.msRequestFullscreen() : alert('Your browser does not support fullscreen!')))))
+    }
+
+    var currentTab = 1;
+    var currentTabs = 1;
+
+    function openTab(id) {
+      for (var i = 0, tabcontents = byId('tabs').children; i < tabcontents.length; i++) {
+        tabcontents[i].style.display = 'none';
+      }
+      for (var i = 0, tabbtns = byId('tabbtns').children; i < tabbtns.length; i++) {
+        tabbtns[i].className = tabbtns[i].className.replace(' active', '');
+      }
+      byId('tab' + id).style.display = 'block';
+      currentTab = id;
+      byId('tabb' + id).className += ' active';
+    }
+
+    window.onload = function () {
+      byId('address').addEventListener('keyup', function (event) {
+        if (event.keyCode == 13) {
+          document.getElementById('load').click();
+        }
+      });
+    }
+
+    function load() {
+      byId('iweb' + currentTab).src = byId('address').value;
+    }
+  </script>
+
+</head>
+
+<body>
+  <h1>赶集FE测试</h1>
+  <div class="tab">
+    <div id="tabbtns">
+      <button class="btn active" onclick="openTab(1)" id="tabb1">摘要</button>
+      <button class="btn" onclick="openTab(2)" id="tabb2">冲突的资源文件</button>
+      <button class="btn" onclick="openTab(3)" id="tabb2">冲突的简单Value</button>
+      <button class="btn" onclick="openTab(4)" id="tabb3">冲突的复合Value</button>
+    </div>
+  </div>
+  <div id="tabs">
+    <div id="tab1" class="tabcontent" style="display:block">
+      <iframe src="wbganji.html" id="iweb1" height="100%" width="100%" allowfullscreen></iframe>
+    </div>
+    <div id="tab2" class="tabcontent" style="display:none">
+      <iframe src="wbmain.html" id="iweb2" height="100%" width="100%" allowfullscreen></iframe>
+    </div>
+    <div id="tab3" class="tabcontent" style="display:none">
+      <iframe src="other.html" id="iweb3" height="100%" width="100%" allowfullscreen></iframe>
+    </div>
+    <div id="tab4" class="tabcontent" style="display:none">
+      <iframe src="other.html" id="iweb3" height="100%" width="100%" allowfullscreen></iframe>
+    </div>
+  </div>
+</body>
+
+</html>
